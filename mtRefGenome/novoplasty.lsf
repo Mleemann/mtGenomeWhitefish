@@ -1,1 +1,9 @@
+#!/bin/bash
+#BSUB -J "NOVOplasty"
+#BSUB -R "rusage[mem=40000]"
+#BSUB -n 1
+#BSUB -W 4:00
 
+# set max memory in config file to limit memory usage, but leads to downsampling
+
+perl NOVOPlasty4.2.pl -c config.txt
