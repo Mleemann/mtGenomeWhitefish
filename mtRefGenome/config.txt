@@ -1,0 +1,38 @@
+Project:
+-----------------------
+Project name          = WhiteFish
+Type                  = mito
+Genome Range          = 12000-22000
+K-mer                 = 33
+Max memory            = 38
+Extended log          = 0
+Save assembled reads  = no
+Seed Input            = /cluster/home/mleeman/references/NC_002646.1.coxI.fasta
+Extend seed directly  = no
+Reference sequence    = /cluster/home/mleeman/references/NC_002646.1.fasta
+Variance detection    =
+Chloroplast sequence  =
+
+Dataset 1:
+-----------------------
+Read Length           = 150
+Insert size           = 300
+Platform              = illumina
+Single/Paired         = PE
+Combined reads        =
+Forward reads         = /cluster/scratch/mleeman/data/illumina/22M2_L8_R1_001_chabBdHmXdSk.fastq.gz
+Reverse reads         = /cluster/scratch/mleeman/data/illumina/22M2_L8_R2_001_uOptbvPmT9xT.fastq.gz
+Store Hash            =
+
+Heteroplasmy:
+-----------------------
+MAF                   =
+HP exclude list       =
+PCR-free              =
+
+Optional:
+-----------------------
+Insert size auto      = yes
+Use Quality Scores    = no
+Output path           =
+
