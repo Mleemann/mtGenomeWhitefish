@@ -8,9 +8,9 @@ Ref=/cluster/scratch/mleeman/freebayes/whitefish_reordered.fasta
 out=/cluster/scratch/mleeman/freebayes/allLakesSingle
 in=/cluster/scratch/mleeman/bwa/allLakesSingle
 
-#module load gcc/4.8.2 gdc perl/5.18.4 samtools/1.10
+module load gcc/4.8.2 gdc perl/5.18.4 samtools/1.10
 
-#samtools faidx ${Ref}
+samtools faidx ${Ref}
 
 module load gcc/4.8.2 gdc python/2.7.11 freebayes/1.3.4
 
