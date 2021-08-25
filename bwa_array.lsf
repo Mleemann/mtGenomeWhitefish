@@ -7,6 +7,7 @@
 
 ########BWA mem; paired end reads; default parameters!!!!; Niklaus Zemp; GDC;niklaus.zemp@env.ethz.ch; 25.10.2017
 ##updated 22.03.18
+## adapted 08.2021 Michèle Leemann
 
 ##Definition of the paths
 data=${SCRATCH}/data/individuals
