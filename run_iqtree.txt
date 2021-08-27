@@ -1,0 +1,3 @@
+# run iqtree with C. albula species as outgroup
+
+iqtree2 -s allIndividuals_filtered_noindels.min4.phy -o 903,904
