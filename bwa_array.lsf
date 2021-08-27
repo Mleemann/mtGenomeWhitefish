@@ -1,22 +1,28 @@
 #!/bin/bash
-#BSUB -J "BWA[1-5]%5"
+#BSUB -J "BWA[1-97]%6"
 #BSUB -R "rusage[mem=15000]"
+#BSUB -R "model==EPYC_7742"
 #BSUB -n 2
 #BSUB -W 24:00
-#BSUB -R "rusage[scratch=200000]"
+#BSUB -R "rusage[scratch=100000]"
+
 
 ########BWA mem; paired end reads; default parameters!!!!; Niklaus Zemp; GDC;niklaus.zemp@env.ethz.ch; 25.10.2017
 ##updated 22.03.18
-## adapted 08.2021 Michèle Leemann
+##adapted 08.21 Michèle Leemann
+
+##change number of jobs depending on number of files to map
+##use BSUB -R "model==EPYC_7742" to avoid old nodes (do not work properly for this job)
 
 ##Definition of the paths
 data=${SCRATCH}/data/individuals
 Ref=/cluster/home/mleeman/references/whitefish_reordered.fasta
 out=${SCRATCH}/bwa
+original=/cluster/work/gdc/shared/p659/data/newnamed
 
 ##Index Reference
-module load gcc/4.8.2 gdc bwa/0.7.12
-bwa index ${Ref}
+#module load gcc/4.8.2 gdc bwa/0.7.12
+#bwa index ${Ref}
 
 #${TMPDIR} lsf internal node scratch variable
 ##Number_processors per Job
@@ -26,16 +32,21 @@ Qual=20
 
 module load gdc gcc/4.8.2 bwa/0.7.17 sambamba/0.7.1 java/1.8.0_101 python/3.6.1 java/1.8.0_73 picard-tools/2.23.8
 
+
 if [ ! -e ${out} ]  ; then mkdir ${out} ; fi
 if [ ! -e ${out}/stats ]  ; then mkdir ${out}/stats ; fi
 if [ ! -e ${out}/statsQ${Qual} ]  ; then mkdir ${out}/statsQ${Qual} ; fi
 if [ ! -e ${out}/stats_dup ]  ; then mkdir  ${out}/stats_dup ; fi
 
+
 IDX=$LSB_JOBINDEX
-name=`sed -n ${IDX}p <sample.list`
+name=`sed -n ${IDX}p < sample.list`
+
+cp ${original}/${name}* ${data}
 
 ###map paired-end read using default parameters
 bwa mem ${Ref} ${data}/${name}_R1.fastq.gz ${data}/${name}_R2.fastq.gz -R "@RG\tID:${name}\tSM:${name}\tPL:Illumina" -t ${cpu} > ${out}/${name}.sam
+rm ${data}/${name}*
 
 ####convert sam to bam and sort it
 sambamba view -t ${cpu} -S ${out}/${name}.sam -f bam -o /dev/stdout|sambamba sort /dev/stdin -o /dev/stdout t ${cpu} -l 0 -m 6GB --tmpdir ${TMPDIR} > ${TMPDIR}/${name}.sort.bam
