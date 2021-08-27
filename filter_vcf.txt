@@ -1,0 +1,15 @@
+module load gcc/4.8.2 gdc perl/5.18.4 zlib/1.2.8 vcftools/0.1.16
+
+## DP filtering
+
+vcftools --gzvcf data/allIndividuals.vcf.gz --minDP 50 --recode --stdout | gzip -c > allIndividuals_filtered.vcf.gz
+
+
+## remove indels
+
+vcftools --gzvcf allIndividuals_filtered.vcf.gz --remove-indels --recode --stdout | gzip -c > allIndividuals_filtered_noindels.vcf.gz
+
+
+## count SNPs (only lines with a letter in the ALT column as also the invariant sites are included in the vcf)
+
+cat allIndividuals_filtered_noindels.vcf | grep -v '^#' | cut -f5 | grep -i '[:alpha:]'
