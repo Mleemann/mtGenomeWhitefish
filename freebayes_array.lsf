@@ -1,8 +1,10 @@
 #!/bin/bash
-#BSUB -J "freebayes[1-29]%15"
+#BSUB -J "freebayes[1-97]%20"
 #BSUB -W 04:00
 #BSUB -n 1
 #BSUB -R "rusage[mem=500]"
+
+##Variant calling producing for each BAM file a VCF file including variant and invariant sites
 
 Ref=/cluster/scratch/mleeman/freebayes/whitefish_reordered.fasta
 out=/cluster/scratch/mleeman/freebayes/allLakesSingle
