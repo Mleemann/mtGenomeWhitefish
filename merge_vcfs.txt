@@ -1,0 +1,10 @@
+module load gcc/4.8.2 gdc perl/5.18.4 samtools/1.10
+
+## zip vcf files
+while read line; do bcftools view ${line}.vcf -Oz -o ${line}.vcf.gz; done < sample.list
+
+## index vcf files
+while read line; do bcftools index ${line}.vcf.gz ; done < sample.list
+
+## merge vcf files
+bcftools merge -l vcfs.txt -Oz -o allIndividuals.vcf.gz
