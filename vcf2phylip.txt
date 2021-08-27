@@ -1,0 +1,8 @@
+## vcf2phylip
+
+module load gcc/4.8.2 gdc python/3.6.1
+
+wget -O vcf2phylip https://github.com/edgardomortiz/vcf2phylip/archive/refs/tags/2.6.tar.gz
+tar -xf vcf2phylip-2.6/vcf2phylip.py
+
+/cluster/home/mleeman/tools/vcf2phylip.py -i allIndividuals.vcf.gz
