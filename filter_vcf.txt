@@ -12,4 +12,5 @@ vcftools --gzvcf allIndividuals_filtered.vcf.gz --remove-indels --recode --stdou
 
 ## count SNPs (only lines with a letter in the ALT column as also the invariant sites are included in the vcf)
 
-cat allIndividuals_filtered_noindels.vcf | grep -v '^#' | cut -f5 | grep -i '[:alpha:]'
+cat allIndividuals_filtered_noindels.vcf | grep -v '^#' | cut -f5 | grep -i 'ATCG'
+# awk '$1=="Contig1" && $5 ~ /[AGTC]/' allIndividuals_filtered_noindels.vcf | wc -l
